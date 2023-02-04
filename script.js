@@ -75,7 +75,7 @@ const renderMovie = (movie) => {
         <div>
             <h3>Actors:</h3>
             <ul id="actors" class="list-unstyled"></ul>
-            <div>
+            
     </div>`;
 };
 
