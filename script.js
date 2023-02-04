@@ -72,9 +72,10 @@ const renderMovie = (movie) => {
             <h3>Overview:</h3>
             <p id="movie-overview">${movie.overview}</p>
         </div>
-        </div>
+        <div>
             <h3>Actors:</h3>
             <ul id="actors" class="list-unstyled"></ul>
+            <div>
     </div>`;
 };
 
