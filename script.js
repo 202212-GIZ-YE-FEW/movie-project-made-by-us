@@ -149,10 +149,61 @@ const genresDropDown= async()=>{
   }
 
   //fetch actors for search purpos
-const fetchActors = async () =>{
+  const fetchActors = async () =>{
 	const url = constructUrl(`person/popular`);
 	 console.log(url);
 	const res = await fetch(url);
 	return res.json();
   }
+  
+  //filter function:1
+const filtersDropDown= async()=>{
+  
+	let filterDropDown = document.querySelector("#filter")
+	 filterDropDown.innerHTML = " "
+  
+	  let dropDown_item =`
+	  <li>
+	  <a class="dropdown-item" data="/now_playing" href="#">Now playing</a>
+	</li>
+	<li>
+	  <a class="dropdown-item" data="/popular" href="#">Popular</a>
+	</li>
+	<li>
+	  <a class="dropdown-item" data="/top_rated" href="#">Top rated</a>
+	</li>
+	<li>
+	  <a class="dropdown-item" data="/upcoming" href="#">Upcoming</a>
+	</li>`
+	filterDropDown.innerHTML += dropDown_item
+	
+	 selectedFilter()
+  }
+  
+  //filter function:2
+  const selectedFilter = async ()=>{
+	let filterDropDownItems = document.querySelectorAll("#filter li a")
+	filterDropDownItems.forEach(item =>{
+	  item.addEventListener("click",(e)=>{
+		dropCollapse.classList.remove("show")
+		filterResult(e.target.getAttribute("data"))
+	  })
+	})
+  }
+  //filter function:3
+  const filterResult = async (filter)=>{
+	const filters = await fetchFilters(filter)
+	// filters.results.forEach(one => console.log(one.title))
+	CONTAINER.innerHTML= " "
+	renderSearchAndFilter(filters.results)
+  }
+  //filter function:4
+  const fetchFilters = async (filter) => {
+	 console.log(filter);
+	const url = constructUrl(`movie${filter}`);
+	const res = await fetch(url);
+	  console.log(url);
+	return res.json();
+  };
+  
 document.addEventListener("DOMContentLoaded", autorun);
