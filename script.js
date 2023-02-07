@@ -148,4 +148,11 @@ const genresDropDown= async()=>{
 	})
   }
 
+  //fetch actors for search purpos
+const fetchActors = async () =>{
+	const url = constructUrl(`person/popular`);
+	 console.log(url);
+	const res = await fetch(url);
+	return res.json();
+  }
 document.addEventListener("DOMContentLoaded", autorun);
