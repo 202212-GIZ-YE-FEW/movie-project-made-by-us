@@ -1,11 +1,83 @@
-#movie-backdrop {
-    width: 100%;
-}
+/* Default that came with the fiels */
 
-.container {
-    padding-top: 32px;
+#movie-backdrop {
+	width: 100%;
 }
 
 #actors {
-    margin: 24px 16px 0 0;
+	margin: 24px 16px 0 0;
+}
+
+.container {
+	padding-top: 8%;
+	max-width: 2560px;
+}
+
+/* ---------------------------------------------------------- */
+
+/* The Root Color */
+:root {
+	--primary-color: #0f0d0d;
+	--secondary-color: #f9f9f9;
+}
+
+/* ---------------------------------------------------------- */
+
+/* The Body Color */
+body {
+	background-color: var(--primary-color);
+	color: var(--secondary-color);
+}
+
+/* Movies Grid  */
+.movies {
+	max-width: 2560px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+
+/* Phone & ipad flexaple */
+@media (max-width: 800px) {
+	.movies {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 500px) {
+	.movies {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------- */
+
+/* Cursor Of The Cards */
+.card {
+	background-color: inherit;
+	cursor: pointer;
+}
+
+/* ---------------------------------------------------------- */
+
+/* Overview */
+.overview {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 5%;
+	background-color: #fff;
+	padding: 1rem;
+	transform: translateY(101%);
+	transition: transform 0.3 ease-in;
+}
+
+/* Overview Hover */
+.card:hover .overview {
+	background-color: var(--primary-color);
+	display: block;
+	transform: translateY(24%);
+	transition: transform 0.3 ease-out;
 }
