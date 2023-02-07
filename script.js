@@ -101,4 +101,51 @@ const renderMovie = (movie) => {
 		</div>`;
 };
 
+//genres function:1
+const genresDropDown= async()=>{
+	let fetchdeGenres = await fetchGenres()
+	let dropDown = document.querySelector("#genres")
+	// console.log(dropDown);
+	dropDown.innerHTML = " "
+	fetchdeGenres.genres.forEach(kind=> {
+	  // console.log(kind.id);
+	  let dropDown_item =`<li><a class="dropdown-item" data=${kind.id} href="#">${kind.name}</a></li>`
+	 dropDown.innerHTML += dropDown_item
+	})
+	selectedGenres()
+  }
+  //genres function:2
+  const fetchGenres = async()=>{
+	let url = constructUrl('/genre/movie/list')
+	// console.log(url);
+	let res = await fetch(url)
+   return res.json();
+  }
+  
+  //genres function:3
+  const selectedGenres = async ()=>{
+	let movies = await moreFetchMovies()
+	// console.log(movies);
+	let found
+	let dropDownItems = document.querySelectorAll("#genres li a")
+	
+	console.log(dropCollapse);
+	 console.log(dropDownItems);
+	dropDownItems.forEach(item =>{
+	  item.addEventListener("click",(e)=>{
+		console.log(e.target);
+		dropCollapse.classList.remove("show")// to hide the collapse one dropdow item clicked
+	  found =  movies.filter(movie => {
+		return movie.genre_ids.find(id => {
+		  return id === parseInt(item.getAttribute("data"))
+		});
+	  })
+		
+		 CONTAINER.innerHTML = " "
+		 renderSearchAndFilter(found)
+			// console.log(found);
+	  })
+	})
+  }
+
 document.addEventListener("DOMContentLoaded", autorun);
