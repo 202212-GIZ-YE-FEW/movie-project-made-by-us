@@ -293,6 +293,18 @@ const filtersDropDown= async()=>{
 	  
 	})
   }
-
+  
+// to check if the clicked item is 
+// Movie or Actor, since each have different
+// properties and different page 
+const searchDetails = async (movie) => {
+	console.log(movie);
+	if ("profile_path" in movie){
+	  //call here the single actor page
+	}
+	if ("poster_path" in movie){
+	  movieDetails(movie)
+	}
+  };
 
 document.addEventListener("DOMContentLoaded", autorun);
