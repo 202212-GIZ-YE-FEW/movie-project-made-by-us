@@ -205,5 +205,42 @@ const filtersDropDown= async()=>{
 	  console.log(url);
 	return res.json();
   };
+
+  //filter & search function: 5
+const renderSearchAndFilter = (results)=>{
+
+	// console.log(results);
+	
+	let div = document.createElement("div")
+	  div.innerHTML = `<h3 class="text-center"> Results </h3>`
+	  div.classList.add("row")
+	for (let i = 0; i<results.length; i++){
+	  
+	  let col = document.createElement("div")
+	  col.classList.add("col-lg-4")
+	  col.classList.add("col-md-6")
+	  col.classList.add("col-sm-12")
+	  col.innerHTML=  `
+	  <div class="card mb-5 shadow-sm" >
+	   <img class="img-fluid" 
+	   style="height: 320px"  
+	   src=${BACKDROP_BASE_URL + (results[i].backdrop_path || results[i].profile_path)}> 
+	  <div class="card-body">
+	  <h5>${results[i].title || results[i].name}</h5>
+		</div>
+	  </div>
+	  `
+	  CONTAINER.innerHTML=" "
+	  col.addEventListener("click", () => {
+		// console.log(results[i]);
+		searchDetails(results[i]);
+	  });
+	  div.append(col)
+	}
+	  CONTAINER.innerHTML = " "
+	  CONTAINER.append(div)
+  }
   
+
+
 document.addEventListener("DOMContentLoaded", autorun);
