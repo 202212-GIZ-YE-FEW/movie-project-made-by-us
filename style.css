@@ -81,3 +81,47 @@ body {
 	transform: translateY(24%);
 	transition: transform 0.3 ease-out;
 }
+/* Navbar & footer styles*/
+#actors {
+    margin: 24px 16px 0 0;
+}
+/* div a {
+    color: black;
+} */
+
+a.nav-link {
+    color: rgba(218, 217, 217, 0.413);
+    text-decoration: none;
+    border-radius: 15px;
+   
+    /* margin: 10px; */
+}
+a.active{
+    /* background-color: rebeccapurple; */
+    /* pointer-events: none; */
+    color: white
+
+}
+.nav-item a:hover{
+    text-decoration: none;
+    /* border: 2px solid purple; */
+    color: rgb(229, 184, 48)
+}
+/* #current{
+    background-color: rgb(10, 126, 243);
+    color: white;
+} */
+.dropdown-menu{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+footer a{
+    color: white;
+}
+.d-flex footer{
+    padding: 30px;
+}
+a.navbar-brand{
+    color: yellow;
+    pointer-events: none;
+}

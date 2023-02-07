@@ -104,6 +104,7 @@ const renderMovie = (movie) => {
 //genres function:1
 const genresDropDown= async()=>{
 	let fetchdeGenres = await fetchGenres()
+	console.log(fetchdeGenres);
 	let dropDown = document.querySelector("#genres")
 	// console.log(dropDown);
 	dropDown.innerHTML = " "
@@ -117,7 +118,7 @@ const genresDropDown= async()=>{
   //genres function:2
   const fetchGenres = async()=>{
 	let url = constructUrl('/genre/movie/list')
-	// console.log(url);
+	//  console.log(url);
 	let res = await fetch(url)
    return res.json();
   }
@@ -293,7 +294,7 @@ const filtersDropDown= async()=>{
 	  
 	})
   }
-  
+
 // to check if the clicked item is 
 // Movie or Actor, since each have different
 // properties and different page 
