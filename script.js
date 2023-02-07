@@ -286,7 +286,7 @@ const filtersDropDown= async()=>{
 			 autorun()
 			};break;
 			case "Genres": genresDropDown();break;
-			case "Actors":/* actors list page;*/ ;break
+			case "Actors":autorun2() ;break
 			case "Filter": filtersDropDown();break;
 			case "About" :/* About page;*/ ;break
 		  }
@@ -357,6 +357,7 @@ const fetchPerson = async (person_id) => {
 };
 
 const renderPersons = (persons) => {
+	CONTAINER.innerHTML= " "
 	persons.map((person) => {
 		console.log(person)
 		const personDiv = document.createElement("div");
@@ -402,4 +403,4 @@ a.id = 'actorPage'
 a.textContent = "Actor Page"
 CONTAINER.appendChild(a)
 
-document.querySelector('#actorPage').addEventListener('click', autorun2);
+// document.querySelector('#actorPage').addEventListener('click', autorun2);
