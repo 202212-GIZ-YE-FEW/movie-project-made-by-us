@@ -308,4 +308,6 @@ const searchDetails = async (movie) => {
 	}
   };
 
+navBar()
+search()
 document.addEventListener("DOMContentLoaded", autorun);
