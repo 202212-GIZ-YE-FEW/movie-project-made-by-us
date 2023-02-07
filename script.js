@@ -104,7 +104,7 @@ const fetchPersons = async () => {
   };
 
 const fetchPerson = async (person_id) => {
-	const url = constructUrl(person/${person_id});
+	const url = constructUrl(`person/${person_id}`);
 	const res = await fetch(url);
 	return res.json();
   };
