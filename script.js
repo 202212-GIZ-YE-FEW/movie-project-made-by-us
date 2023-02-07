@@ -87,3 +87,38 @@ const renderMovie = (movie) => {
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
+
+const autorun2 = async () => {
+	const persons = await fetchPersons();
+	renderPersons(persons.results);
+  };
+
+const fetchPersons = async () => {
+	const url = constructUrl(person/popular);
+	const res = await fetch(url);
+	return res.json();
+  };
+
+  const renderPersons = (persons) => {
+	persons.map((person) => {
+	  console.log(person)
+	const personDiv = document.createElement("div");
+	 personDiv.className = "bigCard" 
+	  personDiv.innerHTML = `
+	  <div class="card" style="width: 18rem;">
+	  <img class="card-img-top"src="${PROFILE_BASE_URL + person.profile_path}" alt="${
+		  person.name}">
+	  <div class="card-body">
+	  <h3>${person.name}</h3>
+		<p class="card-text">add movies that he act</p>
+	  </div>
+	</div>
+	  `;
+	  personDiv.addEventListener("click", () => {
+		personDetails(person);
+	  });
+	  CONTAINER.appendChild(personDiv);
+	});
+  };
+
+document.addEventListener("DOMContentLoaded", autorun2);
