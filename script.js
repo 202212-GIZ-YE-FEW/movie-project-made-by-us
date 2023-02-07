@@ -7,8 +7,10 @@ const CONTAINER = document.querySelector(".container");
 
 // Don't touch this function please
 const autorun = async () => {
-	const movies = await fetchMovies();
-	renderMovies(movies.results);
+	// const movies = await fetchMovies();
+	const moviesMore = await moreFetchMovies()
+	//  console.log(movies.results);
+	renderMovies(moviesMore);
 };
 
 // Don't touch this function please
