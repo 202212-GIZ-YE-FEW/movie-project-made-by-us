@@ -270,6 +270,29 @@ const filtersDropDown= async()=>{
 	})
   }
   
+  const search =  ()=>{
+	let form = document.getElementById("form")
+	form.addEventListener("submit",async (event)=>{
+	  event.preventDefault()
+	  const searchHere = []
+	  // console.log(event.target.elements[0].value);//input value
+	  let movies = await moreFetchMovies()
+	  let actors = await fetchActors()
+	  movies.forEach(movie => {
+		  searchHere.push(movie)
+		})
+		actors.results.forEach(actor => {
+		  searchHere.push(actor)
+		})
+		let found = searchHere.filter(one =>{
+		  // console.log((one.title || one.name).toLowerCase());
+	  return (one.title || one.name).toLowerCase().includes(event.target.elements[0].value) 
+	})
+	  CONTAINER.innerHTML = ""
+	  renderSearchAndFilter(found)
+	  
+	})
+  }
 
 
 document.addEventListener("DOMContentLoaded", autorun);
