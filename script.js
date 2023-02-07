@@ -207,7 +207,7 @@ const filtersDropDown= async()=>{
   };
 
   //filter & search function: 5
-const renderSearchAndFilter = (results)=>{
+  const renderSearchAndFilter = (results)=>{
 
 	// console.log(results);
 	
@@ -239,6 +239,35 @@ const renderSearchAndFilter = (results)=>{
 	}
 	  CONTAINER.innerHTML = " "
 	  CONTAINER.append(div)
+  }
+  
+  const navBar = ()=>{
+	let nav = document.querySelectorAll(".nav-link")
+	
+	 nav.forEach(link => {
+	  
+		link.addEventListener("click",(e)=>{
+  
+		  nav.forEach(each => {
+			each.classList.remove("active")
+			each.id = ""
+		  })
+			// e.target.id = "current"
+			e.target.classList.add("active")
+			 
+		  switch(e.target.innerHTML){
+			case "Home": {
+			  CONTAINER.innerHTML= "";
+			 autorun()
+			};break;
+			case "Genres": genresDropDown();break;
+			case "Actors":/* actors list page;*/ ;break
+			case "Filter": filtersDropDown();break;
+			case "About" :/* About page;*/ ;break
+		  }
+  
+		})
+	})
   }
   
 
