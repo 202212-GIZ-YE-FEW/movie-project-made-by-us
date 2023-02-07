@@ -25,11 +25,17 @@ const genres = {
 	10752: "War",
 	37: "Western"
 };
+let dropCollapse = document.querySelector("#toggleMobileMenu")
+
 
 // Don't touch this function please
 const autorun = async () => {
-	const movies = await fetchMovies();
-	renderMovies(movies.results);
+	navBar()
+	search()
+	// const movies = await fetchMovies();
+	const moviesMore = await moreFetchMovies()
+	//  console.log(movies.results);
+	renderMovies(moviesMore);
 };
 
 // Don't touch this function please
@@ -58,6 +64,19 @@ const fetchMovie = async (movieId) => {
 	const res = await fetch(url);
 	return res.json();
 };
+
+//sarah: fetch from multiple pages 
+//to add more than 20 movies 
+const moreFetchMovies = async () => {
+	let moviesArray =[]
+	 for (let i = 1; i<= 3 ;i++){
+	   const url = constructUrl(`trending/all/day`);
+	   const res = await fetch(`${url}&page=${i}`);
+	   const data = await res.json()
+	   moviesArray.push(...data.results)
+	 }
+	 return moviesArray;
+   };
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
@@ -105,6 +124,214 @@ const renderMovie = (movie) => {
 						
 		</div>`;
 };
+
+//genres function:1
+const genresDropDown= async()=>{
+	let fetchdeGenres = await fetchGenres()
+	console.log(fetchdeGenres);
+	let dropDown = document.querySelector("#genres")
+	// console.log(dropDown);
+	dropDown.innerHTML = " "
+	fetchdeGenres.genres.forEach(kind=> {
+	  // console.log(kind.id);
+	  let dropDown_item =`<li><a class="dropdown-item" data=${kind.id} href="#">${kind.name}</a></li>`
+	 dropDown.innerHTML += dropDown_item
+	})
+	selectedGenres()
+  }
+  //genres function:2
+  const fetchGenres = async()=>{
+	let url = constructUrl('/genre/movie/list')
+	//  console.log(url);
+	let res = await fetch(url)
+   return res.json();
+  }
+  
+  //genres function:3
+  const selectedGenres = async ()=>{
+	let movies = await moreFetchMovies()
+	// console.log(movies);
+	let found
+	let dropDownItems = document.querySelectorAll("#genres li a")
+	
+	// console.log(dropCollapse);
+	 console.log(dropDownItems);
+	dropDownItems.forEach(item =>{
+	  item.addEventListener("click",(e)=>{
+		console.log(e.target);
+		dropCollapse.classList.remove("show")// to hide the collapse one dropdow item clicked
+	  found =  movies.filter(movie => {
+		return movie.genre_ids.find(id => {
+		  return id === parseInt(item.getAttribute("data"))
+		});
+	  })
+		
+		 CONTAINER.innerHTML = " "
+		 renderSearchAndFilter(found)
+			// console.log(found);
+	  })
+	})
+  }
+
+  //fetch actors for search purpos
+  const fetchActors = async () =>{
+	const url = constructUrl(`person/popular`);
+	 console.log(url);
+	const res = await fetch(url);
+	return res.json();
+  }
+  
+  //filter function:1
+const filtersDropDown= async()=>{
+  
+	let filterDropDown = document.querySelector("#filter")
+	 filterDropDown.innerHTML = " "
+  
+	  let dropDown_item =`
+	  <li>
+	  <a class="dropdown-item" data="/now_playing" href="#">Now playing</a>
+	</li>
+	<li>
+	  <a class="dropdown-item" data="/popular" href="#">Popular</a>
+	</li>
+	<li>
+	  <a class="dropdown-item" data="/top_rated" href="#">Top rated</a>
+	</li>
+	<li>
+	  <a class="dropdown-item" data="/upcoming" href="#">Upcoming</a>
+	</li>`
+	filterDropDown.innerHTML += dropDown_item
+	
+	 selectedFilter()
+  }
+  
+  //filter function:2
+  const selectedFilter = async ()=>{
+	let filterDropDownItems = document.querySelectorAll("#filter li a")
+	filterDropDownItems.forEach(item =>{
+	  item.addEventListener("click",(e)=>{
+		dropCollapse.classList.remove("show")
+		filterResult(e.target.getAttribute("data"))
+	  })
+	})
+  }
+  //filter function:3
+  const filterResult = async (filter)=>{
+	const filters = await fetchFilters(filter)
+	// filters.results.forEach(one => console.log(one.title))
+	CONTAINER.innerHTML= " "
+	renderSearchAndFilter(filters.results)
+  }
+  //filter function:4
+  const fetchFilters = async (filter) => {
+	 console.log(filter);
+	const url = constructUrl(`movie${filter}`);
+	const res = await fetch(url);
+	  console.log(url);
+	return res.json();
+  };
+
+  //filter & search function: 5
+  const renderSearchAndFilter = (results)=>{
+
+	// console.log(results);
+	
+	let div = document.createElement("div")
+	  div.innerHTML = `<h3 class="text-center"> Results </h3>`
+	  div.classList.add("row")
+	for (let i = 0; i<results.length; i++){
+	  
+	  let col = document.createElement("div")
+	  col.classList.add("col-lg-4")
+	  col.classList.add("col-md-6")
+	  col.classList.add("col-sm-12")
+	  col.innerHTML=  `
+	  <div class="card mb-5 shadow-sm" >
+	   <img id="img-card" 
+	   style="height: 320px"  
+	   src=${BACKDROP_BASE_URL + (results[i].backdrop_path || results[i].profile_path)}> 
+	  <div class="card-body">
+	  <h5 class="text-center">${results[i].title || results[i].name}</h5>
+		</div>
+	  </div>
+	  `
+	  CONTAINER.innerHTML=" "
+	  col.addEventListener("click", () => {
+		// console.log(results[i]);
+		searchDetails(results[i]);
+	  });
+	  div.append(col)
+	}
+	  CONTAINER.innerHTML = " "
+	  CONTAINER.append(div)
+  }
+  
+  const navBar = ()=>{
+	let nav = document.querySelectorAll(".nav-link")
+	
+	 nav.forEach(link => {
+	  
+		link.addEventListener("click",(e)=>{
+  
+		  nav.forEach(each => {
+			each.classList.remove("active")
+			each.id = ""
+		  })
+			// e.target.id = "current"
+			e.target.classList.add("active")
+			 
+		  switch(e.target.innerHTML){
+			case "Home": {
+			  CONTAINER.innerHTML= "";
+			 autorun()
+			};break;
+			case "Genres": genresDropDown();break;
+			case "Actors":/* actors list page;*/ ;break
+			case "Filter": filtersDropDown();break;
+			case "About" :/* About page;*/ ;break
+		  }
+  
+		})
+	})
+  }
+  
+  const search =  ()=>{
+	let form = document.getElementById("form")
+	form.addEventListener("submit",async (event)=>{
+	  event.preventDefault()
+	  const searchHere = []
+	  // console.log(event.target.elements[0].value);//input value
+	  let movies = await moreFetchMovies()
+	  let actors = await fetchActors()
+	  movies.forEach(movie => {
+		  searchHere.push(movie)
+		})
+		actors.results.forEach(actor => {
+		  searchHere.push(actor)
+		})
+		let found = searchHere.filter(one =>{
+		  // console.log((one.title || one.name).toLowerCase());
+	  return (one.title || one.name).toLowerCase().includes(event.target.elements[0].value) 
+	})
+	  CONTAINER.innerHTML = ""
+	  renderSearchAndFilter(found)
+	  
+	})
+  }
+
+// to check if the clicked item is 
+// Movie or Actor, since each have different
+// properties and different page 
+const searchDetails = async (movie) => {
+	console.log(movie);
+	if ("profile_path" in movie){
+	  //call here the single actor page
+	}
+	if ("poster_path" in movie){
+	  movieDetails(movie)
+	}
+  };
+
 
 document.addEventListener("DOMContentLoaded", autorun);
 
