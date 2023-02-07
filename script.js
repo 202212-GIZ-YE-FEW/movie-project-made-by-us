@@ -92,9 +92,19 @@ const autorun2 = async () => {
 	const persons = await fetchPersons();
 	renderPersons(persons.results);
   };
+const personDetails = async (person) => {
+	const personRes = await fetchPerson(person.id);
+	renderPerson(personRes);
+  };
 
 const fetchPersons = async () => {
 	const url = constructUrl(person/popular);
+	const res = await fetch(url);
+	return res.json();
+  };
+
+const fetchPerson = async (person_id) => {
+	const url = constructUrl(person/${person_id});
 	const res = await fetch(url);
 	return res.json();
   };
@@ -121,4 +131,29 @@ const fetchPersons = async () => {
 	});
   };
 
-document.addEventListener("DOMContentLoaded", autorun2);
+const renderPerson = (person) => {
+  
+	CONTAINER.innerHTML = `
+	  <div class="row">
+		  <div class="col-md-4">
+			   <img id="actor-backdrop" src=${BACKDROP_BASE_URL + person.profile_path}>
+		  </div>
+		  <div class="col-md-8">
+			  <h2 id="actor-name">${person.name}</h2>
+			  <p id="actor-gender" ><b>Gender : </b> ${person.gender}</p>
+			  <p id "actor-birthday"><b>Birthday : </b>${person.birthday}</p>
+			  <p id="person-popularity"><b>Popularity : </b> ${person.popularity} </p>
+		  </div>
+		  <div>
+			  <h3>Biography:</h3>
+			  <p id = "actor-biography">${person.biography}</p>
+			  
+	  </div>`;
+  };
+  let a = document.createElement('a')
+  a.href = '#'
+  a.id = 'actorPage'
+  a.textContent = "Actor Page"
+  CONTAINER.appendChild(a)
+  
+  document.querySelector('#actorPage').addEventListener('click', autorun2);
