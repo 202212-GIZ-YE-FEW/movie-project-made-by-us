@@ -40,6 +40,19 @@ const fetchMovie = async (movieId) => {
 	return res.json();
 };
 
+//sarah: fetch from multiple pages 
+//to add more than 20 movies 
+const moreFetchMovies = async () => {
+	let moviesArray =[]
+	 for (let i = 1; i<= 3 ;i++){
+	   const url = constructUrl(`trending/all/day`);
+	   const res = await fetch(`${url}&page=${i}`);
+	   const data = await res.json()
+	   moviesArray.push(...data.results)
+	 }
+	 return moviesArray;
+   };
+
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
 	const movieContainer = document.createElement("div");
