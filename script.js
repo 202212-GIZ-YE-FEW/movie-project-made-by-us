@@ -118,7 +118,7 @@ const personDetails = async (person) => {
 };
 
 const fetchPersons = async () => {
-	const url = constructUrl(`person / popular`);
+	const url = constructUrl(`person/popular`);
 	const res = await fetch(url);
 	return res.json();
 };
