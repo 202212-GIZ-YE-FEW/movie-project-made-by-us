@@ -25,6 +25,47 @@
   </head>
 
   <body>
+	<nav
+      class="navbar navbar-expand-sm sticky-top bg-dark  "
+      style="background-color: #e3f2fd">
+      <ul class="navbar-nav "  style="margin-left:30px;">
+        <li><a href="#"class=" navbar-brand " >MovieByUs</a></li>
+      </ul>
+      <button class="me-2 navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#toggleMobileMenu"
+      aria-controls="toggleMobileMenu"
+      aria-expanded="false"
+      aria-table="Toggle Navigation"
+      >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse justify-content-lg-around" id="toggleMobileMenu">
+        <ul class="navbar-nav text-center ">
+            <!-- <li><a href="#"class=" navbar-brand " >MadeByUs</a></li> -->
+            <li class="nav-item"><a href="#" class="nav-link ">Home</a></li>
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Genres</a>
+              <ul id ="genres" class="dropdown-menu overflow-scroll">
+                
+              </ul>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link ">Actors</a></li>
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</a>
+              <ul id ="filter" class="dropdown-menu overflow-scroll">
+                
+              </ul>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link ">About</a></li>
+          </ul>
+          <form id ="form" class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning"  type="submit">Search</button>
+          </form>
+     </div>
+    </nav>
     <div class="container"></div>
     <script type="text/javascript" src="script.js"></script>
     <script
