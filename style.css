@@ -125,3 +125,11 @@ a.navbar-brand{
     color: yellow;
     pointer-events: none;
 }
+.nav-css{
+	background-color: inherit;
+	color: inherit;
+}
+#img-card{
+	object-fit: contain;
+	width: 100%;
+}

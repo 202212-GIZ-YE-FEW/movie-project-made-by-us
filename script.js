@@ -9,6 +9,8 @@ let dropCollapse = document.querySelector("#toggleMobileMenu")
 
 // Don't touch this function please
 const autorun = async () => {
+	navBar()
+	search()
 	// const movies = await fetchMovies();
 	const moviesMore = await moreFetchMovies()
 	//  console.log(movies.results);
@@ -225,11 +227,11 @@ const filtersDropDown= async()=>{
 	  col.classList.add("col-sm-12")
 	  col.innerHTML=  `
 	  <div class="card mb-5 shadow-sm" >
-	   <img class="img-fluid" 
+	   <img id="img-card" 
 	   style="height: 320px"  
 	   src=${BACKDROP_BASE_URL + (results[i].backdrop_path || results[i].profile_path)}> 
 	  <div class="card-body">
-	  <h5>${results[i].title || results[i].name}</h5>
+	  <h5 class="text-center">${results[i].title || results[i].name}</h5>
 		</div>
 	  </div>
 	  `
@@ -310,6 +312,5 @@ const searchDetails = async (movie) => {
 	}
   };
 
-navBar()
-search()
+
 document.addEventListener("DOMContentLoaded", autorun);
