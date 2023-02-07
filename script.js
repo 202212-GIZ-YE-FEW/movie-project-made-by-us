@@ -4,6 +4,27 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
+const genres = {
+	28: "Action",
+	12: "Adventure",
+	16: "Animation",
+	35: "Comedy",
+	80: "Crime",
+	99: "Documentary",
+	18: "Drama",
+	10751: "Family",
+	14: "Fantasy",
+	36: "History",
+	27: "Horror",
+	10402: "Music",
+	9648: "Mystery",
+	10749: "Romance",
+	878: "Science Fiction",
+	10770: "TV Movie",
+	53: "Thriller",
+	10752: "War",
+	37: "Western"
+};
 
 // Don't touch this function please
 const autorun = async () => {
@@ -46,17 +67,17 @@ const renderMovies = (movies) => {
 		const movieDiv = document.createElement("div");
 		movieDiv.classList.add("movie");
 		movieDiv.innerHTML = `<div class="card">
-		<div class="card card-top">
-			<img class="card card-img-top"src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
+			<div class="card card-top">
+					<img class="card card-img-top"src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
 			} poster">
-			<p class="overview card card-text">Genres: ${movie.genres}</p>
-			</div>
-			<div class="card card-body">
-			<h3 class="card card-subtitle text-center fs-4 fw-bold">${movie.title}</h3>
-				<p class="rating fw-bold text-center fs-3">Average: ${movie.vote_average}<i class="bi bi-star-fill text-warning fs-2 m-2"></i></p>
-			</div>
-			</div>
-		`;
+					<p class="overview card card-text">Genres: ${movie.genre_ids.map(id => genres[id]).join(", ")}</p>
+					</div>
+					<div class="card card-body">
+					<h3 class="card card-subtitle text-center fs-4 fw-bold">${movie.title}</h3>
+					<p class="rating fw-bold text-center fs-3">Average: ${movie.vote_average}<i class="bi bi-star-fill text-warning fs-2 m-2"></i></p>
+					</div>
+					</div>
+			`;
 		movieDiv.addEventListener("click", () => {
 			movieDetails(movie);
 		});
