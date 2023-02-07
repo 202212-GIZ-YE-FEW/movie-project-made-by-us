@@ -112,48 +112,47 @@ document.addEventListener("DOMContentLoaded", autorun);
 const autorun2 = async () => {
 	const persons = await fetchPersons();
 	renderPersons(persons.results);
-  };
+};
 const personDetails = async (person) => {
 	const personRes = await fetchPerson(person.id);
 	renderPerson(personRes);
-  };
+};
 
 const fetchPersons = async () => {
-	const url = constructUrl(person/popular);
+	const url = constructUrl(person / popular);
 	const res = await fetch(url);
 	return res.json();
-  };
+};
 
 const fetchPerson = async (person_id) => {
 	const url = constructUrl(`person/${person_id}`);
 	const res = await fetch(url);
 	return res.json();
-  };
+};
 
-  const renderPersons = (persons) => {
+const renderPersons = (persons) => {
 	persons.map((person) => {
-	  console.log(person)
-	const personDiv = document.createElement("div");
-	 personDiv.className = "bigCard" 
-	  personDiv.innerHTML = `
+		console.log(person)
+		const personDiv = document.createElement("div");
+		personDiv.className = "bigCard"
+		personDiv.innerHTML = `
 	  <div class="card" style="width: 18rem;">
-	  <img class="card-img-top"src="${PROFILE_BASE_URL + person.profile_path}" alt="${
-		  person.name}">
+	  <img class="card-img-top"src="${PROFILE_BASE_URL + person.profile_path}" alt="${person.name}">
 	  <div class="card-body">
 	  <h3>${person.name}</h3>
 		<p class="card-text">add movies that he act</p>
 	  </div>
 	</div>
 	  `;
-	  personDiv.addEventListener("click", () => {
-		personDetails(person);
-	  });
-	  CONTAINER.appendChild(personDiv);
+		personDiv.addEventListener("click", () => {
+			personDetails(person);
+		});
+		CONTAINER.appendChild(personDiv);
 	});
-  };
+};
 
 const renderPerson = (person) => {
-  
+
 	CONTAINER.innerHTML = `
 	  <div class="row">
 		  <div class="col-md-4">
@@ -170,11 +169,11 @@ const renderPerson = (person) => {
 			  <p id = "actor-biography">${person.biography}</p>
 			  
 	  </div>`;
-  };
-  let a = document.createElement('a')
-  a.href = '#'
-  a.id = 'actorPage'
-  a.textContent = "Actor Page"
-  CONTAINER.appendChild(a)
-  
-  document.querySelector('#actorPage').addEventListener('click', autorun2);
+};
+let a = document.createElement('a')
+a.href = '#'
+a.id = 'actorPage'
+a.textContent = "Actor Page"
+CONTAINER.appendChild(a)
+
+document.querySelector('#actorPage').addEventListener('click', autorun2);
