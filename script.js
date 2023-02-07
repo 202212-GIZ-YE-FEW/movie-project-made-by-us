@@ -68,8 +68,7 @@ const renderMovies = (movies) => {
 		movieDiv.classList.add("movie");
 		movieDiv.innerHTML = `<div class="card">
 			<div class="card card-top">
-					<img class="card card-img-top"src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
-			} poster">
+					<img class="card card-img-top"src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
 					<p class="overview card card-text">Genres: ${movie.genre_ids.map(id => genres[id]).join(", ")}</p>
 					</div>
 					<div class="card card-body">
@@ -119,7 +118,7 @@ const personDetails = async (person) => {
 };
 
 const fetchPersons = async () => {
-	const url = constructUrl(person / popular);
+	const url = constructUrl(`person / popular`);
 	const res = await fetch(url);
 	return res.json();
 };
