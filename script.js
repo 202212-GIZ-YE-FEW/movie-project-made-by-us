@@ -4,6 +4,8 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
+let dropCollapse = document.querySelector("#toggleMobileMenu")
+
 
 // Don't touch this function please
 const autorun = async () => {
@@ -130,7 +132,7 @@ const genresDropDown= async()=>{
 	let found
 	let dropDownItems = document.querySelectorAll("#genres li a")
 	
-	console.log(dropCollapse);
+	// console.log(dropCollapse);
 	 console.log(dropDownItems);
 	dropDownItems.forEach(item =>{
 	  item.addEventListener("click",(e)=>{
