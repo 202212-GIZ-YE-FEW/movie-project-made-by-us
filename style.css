@@ -11,6 +11,8 @@
 .container {
 	padding-top: 8%;
 	max-width: 2560px;
+	display: grid;
+	gap:1.5rem;
 }
 
 /* ---------------------------------------------------------- */
