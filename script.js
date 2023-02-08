@@ -11,6 +11,7 @@ const autorun = async () => {
   renderMovies(movies.results);
 };
 
+
 // Don't touch this function please
 const constructUrl = (path) => {
   return `${TMDB_BASE_URL}/${path}?api_key=${atob(
@@ -21,8 +22,18 @@ const constructUrl = (path) => {
 // You may need to add to this function, definitely don't delete it.
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
+  const actorRes = await fetchActors(movie.id);
+  const trailRes = await fetchTrail(movie.id);
+  const relatedRes = await fetchRelated(movie.id);
   renderMovie(movieRes);
+  renderSingleMovieActor(actorRes);
+  renderTrails(trailRes);
+  renderRelated(relatedRes);
 };
+// const actorDetails = async (actor) => {
+//   const actorRes = await fetchActors(actor.id);
+//   renderSingleMovieActor(actorRes);
+// };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
 const fetchMovies = async () => {
@@ -31,6 +42,27 @@ const fetchMovies = async () => {
   return res.json();
 };
 
+
+const fetchRelated = async (movieId) => {
+  const url = constructUrl(`movie/${movieId}/similar`);
+  console.log(url)
+  const res = await fetch(url);
+  return res.json();
+};
+
+const fetchActors = async (movieId) => {
+  const url = constructUrl(`movie/${movieId}/credits`);
+  console.log(url)
+  const res = await fetch(url);
+  return res.json();
+};
+
+const fetchTrail = async (movieId) => {
+  const url = constructUrl(`movie/${movieId}/videos`);
+  console.log(url)
+  const res = await fetch(url);
+  return res.json();
+};
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
   const url = constructUrl(`movie/${movieId}`);
@@ -43,9 +75,8 @@ const renderMovies = (movies) => {
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster">
+        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
+      } poster">
         <h3>${movie.title}</h3>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
@@ -56,26 +87,72 @@ const renderMovies = (movies) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie) => {
+  console.log(movie)
   CONTAINER.innerHTML = `
     <div class="row">
         <div class="col-md-4">
-             <img id="movie-backdrop" src=${
-               BACKDROP_BASE_URL + movie.backdrop_path
-             }>
+             <img id="movie-backdrop" src=${BACKDROP_BASE_URL + movie.backdrop_path
+    }>
         </div>
         <div class="col-md-8">
             <h2 id="movie-title">${movie.title}</h2>
-            <p id="movie-release-date"><b>Release Date:</b> ${
-              movie.release_date
-            }</p>
-            <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
-            <h3>Overview:</h3>
-            <p id="movie-overview">${movie.overview}</p>
+            <p id="movie-release-date"><b>Catgory:</b> <span>${movie.genres.map((ele) => { return ele.name })}</span></p>
+            <p id="movie-release-date"><b>Release Date:</b> <span>${movie.release_date}</span></p>
+            <p id="movie-runtime"><b>Runtime:</b> <span>${movie.runtime} Minutes</span></p>
+            <p id="movie-lang"> <b>language:</b> <span>${movie.original_language}glish</span></p>
+            <p id="directior-name"><b>Director name :</b> <span>${movie.director}</span></p>
+            <p id="movie-votes"><b>Votes received :</b> <span>${movie.vote_count}</span></p>
+            <p id="movie-rating"><b>Rating :</b> <span>${movie.vote_average}</span></p>
         </div>
+        
+        <div class="pl-3">
+        <h3 class="mt-3 title-Pro">Production Companies:</h3>
+        <div class="container-production">
+           ${movie.production_companies.map((ele) => {
+      return `<div class="production-companies"><img src=${ele.logo_path ? BACKDROP_BASE_URL + ele.logo_path : "https://via.placeholder.com/150" }><p>${ele.name}</p></div>`;
+    }).join(' ')}
         </div>
-            <h3>Actors:</h3>
-            <ul id="actors" class="list-unstyled"></ul>
-    </div>`;
+          <h3 class="mt-5">Overview:</h3>
+          <p id="movie-overview">${movie.overview}</p>  
+        </div>
+        `;
 };
 
+const renderSingleMovieActor = (movie) => {
+  console.log(movie)
+  CONTAINER.innerHTML += `
+  <h3 class="mt-3 mb-3">Actors:<h3>
+  <div class="container-actor">
+        ${movie.cast.slice(0, 5).map((ele) => {
+    return `<div class="actor-card"><img id="actor-img" src=${BACKDROP_BASE_URL + ele.profile_path}><p>${ele.name}</p></div>`;
+  }).join(' ')}
+  </div>
+        `
+}
+
+const renderTrails = (movie) => {
+  console.log(movie)
+  CONTAINER.innerHTML += `
+    <h2>Trails:</h2>
+    ${movie.results.slice(0, 1).map((ele) => {
+    return `<iframe width="100%" height="700" src="https://www.youtube.com/embed/${ele.key}" title=${ele.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+  }).join(' ')}
+        `
+}
+
+const renderRelated = (movie) => {
+  console.log(movie)
+  CONTAINER.innerHTML += `
+    <h3 class="mt-3 mb-3">Related Movie:<h3>
+   <div class="container-actor">
+        ${movie.results.map((ele) => {
+    return `<div class="actor-card"><img id="actor-img" src=${BACKDROP_BASE_URL + ele.poster_path}><p>${ele.orginal_title}</p></div>`;
+  }).join(' ')}
+  </div>
+        `
+}
+
 document.addEventListener("DOMContentLoaded", autorun);
+
+
+
