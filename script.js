@@ -80,6 +80,8 @@ const moreFetchMovies = async () => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+	// console.log(movies);
+	CONTAINER.innerHTML= " "
 	const movieContainer = document.createElement("div");
 	movieContainer.classList.add("movies");
 	movies.map((movie) => {
@@ -91,7 +93,7 @@ const renderMovies = (movies) => {
 					<p class="overview card card-text">Genres: ${movie.genre_ids.map(id => genres[id]).join(", ")}</p>
 					</div>
 					<div class="card card-body">
-					<h3 class="card card-subtitle text-center fs-4 fw-bold">${movie.title}</h3>
+					<h3 class="card card-subtitle text-center fs-4 fw-bold">${movie.title || movie.name}</h3>
 					<p class="rating fw-bold text-center fs-3">Average: ${movie.vote_average}<i class="bi bi-star-fill text-warning fs-2 m-2"></i></p>
 					</div>
 					</div>
@@ -134,7 +136,7 @@ const genresDropDown= async()=>{
 	dropDown.innerHTML = " "
 	fetchdeGenres.genres.forEach(kind=> {
 	  // console.log(kind.id);
-	  let dropDown_item =`<li><a class="dropdown-item" data=${kind.id} href="#">${kind.name}</a></li>`
+	  let dropDown_item =`<li><a class="dropdown-item " data=${kind.id} href="#">${kind.name}</a></li>`
 	 dropDown.innerHTML += dropDown_item
 	})
 	selectedGenres()
@@ -167,8 +169,8 @@ const genresDropDown= async()=>{
 	  })
 		
 		 CONTAINER.innerHTML = " "
-		 renderSearchAndFilter(found)
-			// console.log(found);
+		 renderSearchAndFilter(found,item.innerHTML)
+
 	  })
 	})
   }
@@ -211,16 +213,16 @@ const filtersDropDown= async()=>{
 	filterDropDownItems.forEach(item =>{
 	  item.addEventListener("click",(e)=>{
 		dropCollapse.classList.remove("show")
-		filterResult(e.target.getAttribute("data"))
+		console.log();
+		filterResult(e.target.getAttribute("data"),e.target.innerHTML)
 	  })
 	})
   }
   //filter function:3
-  const filterResult = async (filter)=>{
+  const filterResult = async (filter,selectedFilter)=>{
 	const filters = await fetchFilters(filter)
-	// filters.results.forEach(one => console.log(one.title))
 	CONTAINER.innerHTML= " "
-	renderSearchAndFilter(filters.results)
+	renderSearchAndFilter(filters.results,selectedFilter)
   }
   //filter function:4
   const fetchFilters = async (filter) => {
@@ -232,12 +234,10 @@ const filtersDropDown= async()=>{
   };
 
   //filter & search function: 5
-  const renderSearchAndFilter = (results)=>{
+  const renderSearchAndFilter = (results,name = "Search Results")=>{
 
-	// console.log(results);
-	
 	let div = document.createElement("div")
-	  div.innerHTML = `<h3 class="text-center"> Results </h3>`
+	  div.innerHTML = `<h3 class="text-center"> ${name} </h3>`
 	  div.classList.add("row")
 	for (let i = 0; i<results.length; i++){
 	  
@@ -288,7 +288,7 @@ const filtersDropDown= async()=>{
 			case "Genres": genresDropDown();break;
 			case "Actors":autorun2() ;break
 			case "Filter": filtersDropDown();break;
-			case "About" :/* About page;*/ ;break
+			case "About" : aboutPage() ;break
 		  }
   
 		})
@@ -306,7 +306,7 @@ const filtersDropDown= async()=>{
 	  movies.forEach(movie => {
 		  searchHere.push(movie)
 		})
-		actors.results.forEach(actor => {
+	  actors.results.forEach(actor => {
 		  searchHere.push(actor)
 		})
 		let found = searchHere.filter(one =>{
@@ -319,7 +319,7 @@ const filtersDropDown= async()=>{
 	})
   }
 
-// to check if the clicked item is 
+// to check if the clicked item in the search results is 
 // Movie or Actor, since each have different
 // properties and different page 
 const searchDetails = async (movie) => {
@@ -331,7 +331,22 @@ const searchDetails = async (movie) => {
 	  movieDetails(movie)
 	}
   };
-
+const aboutPage = ()=>{
+	CONTAINER.innerHTML =" "
+	CONTAINER.innerHTML = `
+	<div class= "text-center" style="height:auto ">
+	<h4>About Us</h4>
+	<p>This website had made for the second project in the Yemen &#127486;&#127466; bootcamp 2023 &#127881;</p>
+	<p>it had built by fetching movies API and manipulating the DOM by HTML,CSS, and Javascript</p>
+	<p>Our AWESOME team has collaborated on this work and has done their best  </p>
+	<p>and by mentioning that, let us introduce our names</p>
+	<p>	<i style="color:orange">&#127881; Abdullah, Abobakr, Sarah, Sufyan and finally Yassin &#127881; </i>
+	</p>
+	<p>Enjoy watching and we hope you find this website wonderful! </p>
+	
+	</div>
+	`
+}
 
 document.addEventListener("DOMContentLoaded", autorun);
 
@@ -359,7 +374,7 @@ const fetchPerson = async (person_id) => {
 const renderPersons = (persons) => {
 	CONTAINER.innerHTML= " "
 	persons.map((person) => {
-		console.log(person)
+		// console.log(person)
 		const personDiv = document.createElement("div");
 		personDiv.className = "bigCard"
 		personDiv.innerHTML = `
@@ -397,10 +412,10 @@ const renderPerson = (person) => {
 			  
 	  </div>`;
 };
-let a = document.createElement('a')
-a.href = '#'
-a.id = 'actorPage'
-a.textContent = "Actor Page"
-CONTAINER.appendChild(a)
+// let a = document.createElement('a')
+// a.href = '#'
+// a.id = 'actorPage'
+// a.textContent = "Actor Page"
+// CONTAINER.appendChild(a)
 
 // document.querySelector('#actorPage').addEventListener('click', autorun2);
