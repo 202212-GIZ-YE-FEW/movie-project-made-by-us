@@ -98,10 +98,10 @@ a.nav-link {
    
     /* margin: 10px; */
 }
-a.active{
+.active{
     /* background-color: rebeccapurple; */
     /* pointer-events: none; */
-    color: white
+    color: white !important;
 
 }
 .nav-item a:hover{
@@ -118,20 +118,50 @@ a.active{
     overflow-y: scroll;
 }
 footer a{
-    color: white;
+    color: antiquewhite;
 }
 .d-flex footer{
     padding: 30px;
 }
 a.navbar-brand{
-    color: yellow;
+    color: #ebbc4f;
     pointer-events: none;
 }
-.nav-css{
+/* .nav-css{
 	background-color: inherit;
 	color: inherit;
-}
+} */
 #img-card{
 	object-fit: contain;
 	width: 100%;
+}
+#genres, #filter{
+	background-color: rgb(21, 20, 20);
+	
+}
+#genres li a ,#filter li a {
+	color: antiquewhite;
+	text-align: center;
+}
+
+#genres li a:hover ,#filter li a:hover {
+	color: rgb(216, 179, 16);
+	background-color: inherit
+	/* text-align: center; */
+}
+
+.navbar-brand img{
+	border-radius: 50%;
+}
+
+.d-lg-flex{
+	padding: 14px;
+}
+
+#copyrightDiv{
+	padding: 13px;
+}
+.name{
+	font-size: smaller;
+	letter-spacing: 3px; 
 }
