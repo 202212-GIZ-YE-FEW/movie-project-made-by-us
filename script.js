@@ -30,10 +30,6 @@ const movieDetails = async (movie) => {
   renderTrails(trailRes);
   renderRelated(relatedRes);
 };
-// const actorDetails = async (actor) => {
-//   const actorRes = await fetchActors(actor.id);
-//   renderSingleMovieActor(actorRes);
-// };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
 const fetchMovies = async () => {
@@ -42,7 +38,7 @@ const fetchMovies = async () => {
   return res.json();
 };
 
-
+// To fatch Realted Movies in Movie Detilas.
 const fetchRelated = async (movieId) => {
   const url = constructUrl(`movie/${movieId}/similar`);
   console.log(url)
@@ -50,13 +46,14 @@ const fetchRelated = async (movieId) => {
   return res.json();
 };
 
+// To fatch Actors in Movie Detilas.
 const fetchActors = async (movieId) => {
   const url = constructUrl(`movie/${movieId}/credits`);
   console.log(url)
   const res = await fetch(url);
   return res.json();
 };
-
+// To fatch Trails in Movie Detilas.
 const fetchTrail = async (movieId) => {
   const url = constructUrl(`movie/${movieId}/videos`);
   console.log(url)
@@ -95,58 +92,60 @@ const renderMovie = (movie) => {
     }>
         </div>
         <div class="col-md-8">
-            <h2 id="movie-title">${movie.title}</h2>
-            <p id="movie-release-date"><b>Catgory:</b> <span>${movie.genres.map((ele) => { return ele.name })}</span></p>
-            <p id="movie-release-date"><b>Release Date:</b> <span>${movie.release_date}</span></p>
-            <p id="movie-runtime"><b>Runtime:</b> <span>${movie.runtime} Minutes</span></p>
-            <p id="movie-lang"> <b>language:</b> <span>${movie.original_language}glish</span></p>
-            <p id="directior-name"><b>Director name :</b> <span>${movie.director}</span></p>
-            <p id="movie-votes"><b>Votes received :</b> <span>${movie.vote_count}</span></p>
-            <p id="movie-rating"><b>Rating :</b> <span>${movie.vote_average}</span></p>
+            <h2 id="movie-title" class="movie-title">${movie.title}</h2>
+            <p id="movie-release-date"> <b>Categories : </b>${movie.genres.map((ele) => { return  `<span>${ele.name}</span>` }).join(' ')}</p>
+           
+            <p id="movie-release-date"><b>Release Date : </b> <span>${movie.release_date}</span></p>
+            <p id="movie-runtime"><b>Runtime : </b> <span>${movie.runtime} Minutes</span></p>
+            <p id="movie-lang"> <b>Language : </b> <span>${movie.original_language}glish</span></p>
+            <p id="directior-name"><b>Director name : </b> <span>${movie.director}</span></p>
+            <p id="movie-votes"><b>Votes received : </b> <span>${movie.vote_count}</span></p>
+            <p id="movie-rating"><b>Rating : </b> <span>${movie.vote_average}</span></p>
         </div>
         
         <div class="pl-3">
-        <h3 class="mt-3 title-Pro">Production Companies:</h3>
+        <h3 class="mt-5 mb-3 movie-title production ">Production Companies:</h3>
         <div class="container-production">
            ${movie.production_companies.map((ele) => {
       return `<div class="production-companies"><img src=${ele.logo_path ? BACKDROP_BASE_URL + ele.logo_path : "https://via.placeholder.com/150" }><p>${ele.name}</p></div>`;
     }).join(' ')}
         </div>
-          <h3 class="mt-5">Overview:</h3>
+          <h3 class="mt-5 mb-3 movie-title overview">Overview :</h3>
           <p id="movie-overview">${movie.overview}</p>  
         </div>
         `;
 };
-
+// This is for Single Movie Actors in Movie Details
 const renderSingleMovieActor = (movie) => {
   console.log(movie)
   CONTAINER.innerHTML += `
-  <h3 class="mt-3 mb-3">Actors:<h3>
-  <div class="container-actor">
+  <h3 class="mt-5 mb-3 movie-title actor">Actors :<h3>
+  <div class="container-actor mt-5">
         ${movie.cast.slice(0, 5).map((ele) => {
     return `<div class="actor-card"><img id="actor-img" src=${BACKDROP_BASE_URL + ele.profile_path}><p>${ele.name}</p></div>`;
   }).join(' ')}
   </div>
         `
 }
-
+// This is for Trails Movie in Movie Details
 const renderTrails = (movie) => {
   console.log(movie)
   CONTAINER.innerHTML += `
-    <h2>Trails:</h2>
+    <h3 class="mt-5 mb-3 movie-title trails">Trails :</h3>
     ${movie.results.slice(0, 1).map((ele) => {
     return `<iframe width="100%" height="700" src="https://www.youtube.com/embed/${ele.key}" title=${ele.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
   }).join(' ')}
         `
 }
 
+// This is for Related Movies in Movie Details 
 const renderRelated = (movie) => {
   console.log(movie)
   CONTAINER.innerHTML += `
-    <h3 class="mt-3 mb-3">Related Movie:<h3>
-   <div class="container-actor">
-        ${movie.results.map((ele) => {
-    return `<div class="actor-card"><img id="actor-img" src=${BACKDROP_BASE_URL + ele.poster_path}><p>${ele.orginal_title}</p></div>`;
+    <h3 class="mt-5 mb-3 movie-title related">Related Movie :<h3>
+   <div class="container-actor mt-5 mb-5">
+        ${movie.results.slice(0, 5).map((ele) => {
+    return `<div class="actor-card"><img id="actor-img" src=${ele.poster_path ?  BACKDROP_BASE_URL + ele.poster_path : "https://via.placeholder.com/150" }><p>${ele.original_title}</p></div>`;
   }).join(' ')}
   </div>
         `
