@@ -1,9 +1,3 @@
-body {
-    background-color: #15262D;
-    color: #FFF;
-    font-family: 'Open Sans', sans-serif;
-}
-
 #movie-backdrop {
     width: 100%;
     height: 100%;
@@ -38,19 +32,76 @@ body {
     font-size: 13px;
 }
 
-#directior-name {
-    margin-top: 15px;
-}
+/* Default that came with the fiels */
+
 
 .container {
-    padding-top: 32px;
+	padding-top: 8%;
+	max-width: 2560px;
+	display:grid;
+	gap:1.5;
 }
 
-ul#actors {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+/* ---------------------------------------------------------- */
 
+/* The Root Color */
+:root {
+	--primary-color: #0f0d0d;
+	--secondary-color: #f9f9f9;
+}
+
+/* ---------------------------------------------------------- */
+
+/* The Body Color */
+body {
+	background-color: var(--primary-color) //#15262D ;
+	color: var(--secondary-color);
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Movies Grid  */
+.movies {
+	max-width: 2560px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+
+/* Phone & ipad flexaple */
+@media (max-width: 800px) {
+	.movies {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 500px) {
+	.movies {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------- */
+
+/* Cursor Of The Cards */
+.card {
+	background-color: inherit;
+	cursor: pointer;
+}
+
+/* ---------------------------------------------------------- */
+
+/* Overview */
+.overview {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 5%;
+	background-color: #fff;
+	padding: 1rem;
+	transform: translateY(101%);
+	transition: transform 0.3 ease-in;
 }
 
 .actor-section {
@@ -215,3 +266,94 @@ ul#actors {
 }
 
 /* End Actor Card Desing With Single Home Page */
+
+/* Overview Hover */
+.card:hover .overview {
+	background-color: var(--primary-color);
+	display: block;
+	transform: translateY(24%);
+	transition: transform 0.3 ease-out;
+}
+/* Navbar & footer styles*/
+#actors {
+    margin: 24px 16px 0 0;
+}
+/* div a {
+    color: black;
+} */
+
+a.nav-link {
+    color: rgba(218, 217, 217, 0.413);
+    text-decoration: none;
+    border-radius: 15px;
+   
+    /* margin: 10px; */
+}
+.active{
+    /* background-color: rebeccapurple; */
+    /* pointer-events: none; */
+    color: white !important;
+
+}
+.nav-item a:hover{
+    text-decoration: none;
+    /* border: 2px solid purple; */
+    color: rgb(229, 184, 48)
+}
+/* #current{
+    background-color: rgb(10, 126, 243);
+    color: white;
+} */
+.dropdown-menu{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+footer a{
+    color: antiquewhite;
+}
+.d-flex footer{
+    padding: 30px;
+}
+a.navbar-brand{
+    color: #ebbc4f;
+    pointer-events: none;
+}
+/* .nav-css{
+	background-color: inherit;
+	color: inherit;
+} */
+#img-card{
+	object-fit: contain;
+	width: 100%;
+}
+#genres, #filter{
+	background-color: rgb(21, 20, 20);
+	
+}
+#genres li a ,#filter li a {
+	color: antiquewhite;
+	text-align: center;
+}
+
+#genres li a:hover ,#filter li a:hover {
+	color: rgb(216, 179, 16);
+	background-color: inherit
+	/* text-align: center; */
+}
+
+.navbar-brand img{
+	border-radius: 50%;
+}
+
+.d-lg-flex{
+	padding: 14px;
+}
+
+#copyrightDiv{
+	padding: 13px;
+}
+.name{
+	font-size: smaller;
+	letter-spacing: 3px; 
+}
+
