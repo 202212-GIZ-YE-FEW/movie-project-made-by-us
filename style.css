@@ -142,7 +142,7 @@ body {
 .container h3.production {
     width: 35%;
 }
-.container h3.overview {
+.container h3.over {
     width: 17%;
 }
 .container h3.actor {
@@ -211,7 +211,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    cursor: pointer;
+    
 }
 
 .container-actor .actor-card {
@@ -219,6 +219,7 @@ body {
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
     transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .container-actor .actor-card:hover {

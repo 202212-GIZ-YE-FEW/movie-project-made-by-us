@@ -33,6 +33,7 @@ const autorun = async () => {
   search();
   // const movies = await fetchMovies();
   const moviesMore = await moreFetchMovies();
+
   //  console.log(movies.results);
   renderMovies(moviesMore);
 };
@@ -52,7 +53,7 @@ const movieDetails = async (movie) => {
   const trailRes = await fetchTrail(movie.id);
   const relatedRes = await fetchRelated(movie.id);
   renderMovie(movieRes);
-  renderSingleMovieActor(actorRes);
+  renderActors(actorRes);
   renderTrails(trailRes);
   renderRelated(relatedRes);
 };
@@ -167,12 +168,13 @@ const renderMovie = (movie) => {
       return `<div class="production-companies"><img src=${ele.logo_path ? BACKDROP_BASE_URL + ele.logo_path : "https://via.placeholder.com/150"}><p>${ele.name}</p></div>`;
     }).join(' ')}
         </div>
-          <h3 class="mt-5 mb-3 movie-title overview">Overview :</h3>
+          <h3 class="mt-5 mb-3 movie-title over">Overview :</h3>
           <p id="movie-overview">${movie.overview}</p>  
         </div>
         `;
 };
-const renderSingleMovieActor = (movie) => {
+// renderActors to the A Single Movie
+const renderActors = (movie) => {
   CONTAINER.innerHTML += `
   <h3 class="mt-5 mb-3 movie-title actor">Actor : <h3>
   <div class="container-actor mt-5">
@@ -181,6 +183,7 @@ const renderSingleMovieActor = (movie) => {
   }).join(' ')}
   </div>`
 }
+
 // This is for Trails Movie in Movie Details
 const renderTrails = (movie) => {
   console.log(movie)
