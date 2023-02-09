@@ -1,3 +1,29 @@
+
+
+/* Default that came with the fiels */
+
+
+
+
+/* ---------------------------------------------------------- */
+
+/* The Root Color */
+:root {
+	--primary-color: #0f0d0d;
+	--secondary-color: #f9f9f9;
+}
+
+/* ---------------------------------------------------------- */
+
+/* The Body Color */
+body {
+	background-color: var(--primary-color); /*#15262D ;*/
+	color: var(--secondary-color);
+  font-family: 'Open Sans', sans-serif;
+}
+.container {
+	margin-top: 50px;
+}
 #movie-backdrop {
     width: 100%;
     height: 100%;
@@ -5,7 +31,7 @@
     object-fit: cover;
     padding: 0;
     margin: 0;
-
+}
 /* Default that came with the fiels */
 
 #movie-release-date>p,
@@ -32,34 +58,6 @@
     border-radius: 10px;
     font-size: 13px;
 }
-
-/* Default that came with the fiels */
-
-
-.container {
-	padding-top: 8%;
-	max-width: 2560px;
-	display:grid;
-	gap:1.5;
-}
-
-/* ---------------------------------------------------------- */
-
-/* The Root Color */
-:root {
-	--primary-color: #0f0d0d;
-	--secondary-color: #f9f9f9;
-}
-
-/* ---------------------------------------------------------- */
-
-/* The Body Color */
-body {
-	background-color: var(--primary-color) //#15262D ;
-	color: var(--secondary-color);
-  font-family: 'Open Sans', sans-serif;
-}
-
 /* Movies Grid  */
 .movies,.mainCard {
 	max-width: 2560px;

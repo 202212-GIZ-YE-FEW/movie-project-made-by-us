@@ -48,7 +48,7 @@ const constructUrl = (path) => {
 // You may need to add to this function, definitely don't delete it.
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
-  const actorRes = await fetchActors(movie.id);
+  const actorRes = await fetchActorsMovie(movie.id);
   const trailRes = await fetchTrail(movie.id);
   const relatedRes = await fetchRelated(movie.id);
   renderMovie(movieRes);
@@ -73,7 +73,7 @@ const fetchRelated = async (movieId) => {
 };
 
 // To fatch Actors in Movie Detilas.
-const fetchActors = async (movieId) => {
+const fetchActorsMovie = async (movieId) => {
   const url = constructUrl(`movie/${movieId}/credits`);
   console.log(url)
   const res = await fetch(url);
@@ -211,9 +211,6 @@ const renderRelated = (movie) => {
 }
 
 document.addEventListener("DOMContentLoaded", autorun);
-
-
-};
 
 //genres function:1
 const genresDropDown = async () => {
