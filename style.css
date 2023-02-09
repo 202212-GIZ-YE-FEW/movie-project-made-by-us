@@ -5,7 +5,8 @@
     object-fit: cover;
     padding: 0;
     margin: 0;
-}
+
+/* Default that came with the fiels */
 
 #movie-release-date>p,
 #movie-runtime>p,
@@ -60,23 +61,26 @@ body {
 }
 
 /* Movies Grid  */
-.movies {
+.movies,.mainCard {
 	max-width: 2560px;
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 2rem;
 }
+.bigCard{
+	border: 1px solid rgba(45, 42, 42, 0.593);
+}
 
 /* Phone & ipad flexaple */
 @media (max-width: 800px) {
-	.movies {
+	.movies,.mainCard {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
 @media (max-width: 500px) {
-	.movies {
+	.movies,.mainCard {
 		grid-template-columns: repeat(1, 1fr);
 	}
 }
@@ -305,8 +309,11 @@ a.nav-link {
     color: white;
 } */
 .dropdown-menu{
-    max-height: 200px;
+    max-height: 660px;
     overflow-y: scroll;
+}
+.overflow-scroll{
+	overflow: hidden !important;
 }
 footer a{
     color: antiquewhite;
@@ -357,3 +364,7 @@ a.navbar-brand{
 	letter-spacing: 3px; 
 }
 
+
+#actor-biography{
+	font-size: larger;
+}
