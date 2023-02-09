@@ -89,8 +89,7 @@ const renderMovies = (movies) => {
 		movieDiv.innerHTML = `<div class="card">
 			<div class="card card-top">
 					<img class="card card-img-top"src="${
-						BACKDROP_BASE_URL + movie.backdrop_path
-					}" alt="${movie.title} poster">
+						BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
 					<p class="overview card card-text">Genres: ${movie.genre_ids
 						.map((id) => genres[id])
 						.join(', ')}</p>
@@ -137,7 +136,7 @@ const renderMovie = (movie) => {
 //genres function:1
 const genresDropDown = async () => {
 	let fetchdeGenres = await fetchGenres();
-	console.log(fetchdeGenres);
+	// console.log(fetchdeGenres);
 	let dropDown = document.querySelector('#genres');
 	// console.log(dropDown);
 	dropDown.innerHTML = ' ';
@@ -164,10 +163,10 @@ const selectedGenres = async () => {
 	let dropDownItems = document.querySelectorAll('#genres li a');
 
 	// console.log(dropCollapse);
-	console.log(dropDownItems);
+	// console.log(dropDownItems);
 	dropDownItems.forEach((item) => {
 		item.addEventListener('click', (e) => {
-			console.log(e.target);
+			// console.log(e.target);
 			dropCollapse.classList.remove('show'); // to hide the collapse one dropdow item clicked
 			found = movies.filter((movie) => {
 				return movie.genre_ids.find((id) => {
@@ -184,7 +183,7 @@ const selectedGenres = async () => {
 //fetch actors for search purpos
 const fetchActors = async () => {
 	const url = constructUrl(`person/popular`);
-	console.log(url);
+	// console.log(url);
 	const res = await fetch(url);
 	return res.json();
 };
@@ -218,7 +217,6 @@ const selectedFilter = async () => {
 	filterDropDownItems.forEach((item) => {
 		item.addEventListener('click', (e) => {
 			dropCollapse.classList.remove('show');
-			console.log();
 			filterResult(e.target.getAttribute('data'), e.target.innerHTML);
 		});
 	});
@@ -231,10 +229,10 @@ const filterResult = async (filter, selectedFilter) => {
 };
 //filter function:4
 const fetchFilters = async (filter) => {
-	console.log(filter);
+	// console.log(filter);
 	const url = constructUrl(`movie${filter}`);
 	const res = await fetch(url);
-	console.log(url);
+	// console.log(url);
 	return res.json();
 };
 
@@ -337,7 +335,7 @@ const search = () => {
 // Movie or Actor, since each have different
 // properties and different page
 const searchDetails = async (movie) => {
-	console.log(movie);
+	// console.log(movie);
 	if ('profile_path' in movie) {
 		//call here the single actor page
 	}
@@ -393,6 +391,9 @@ const fetchPerson = async (person_id) => {
 
 const renderPersons = (persons) => {
 	CONTAINER.innerHTML = ' ';
+	let mainCard = document.createElement('div')
+	mainCard.className = 'mainCard';
+	CONTAINER.appendChild(mainCard)
 	persons.map((person) => {
 		// console.log(person)
 		const personDiv = document.createElement('div');
@@ -404,19 +405,21 @@ const renderPersons = (persons) => {
 		}" alt="${person.name}">
 	  <div class="card-body">
 	  <h3>${person.name}</h3>
-		<p class="card-text">add movies that he act</p>
+		<h5 class="card-text">${person.known_for_department}</h5>
 	  </div>
 	</div>
 	  `;
 		personDiv.addEventListener('click', () => {
 			personDetails(person);
 		});
-		CONTAINER.appendChild(personDiv);
+		mainCard.appendChild(personDiv);
 	});
 };
 
+
+
 const renderPerson = (person) => {
-	console.log(person);
+	// console.log(person);
 	CONTAINER.innerHTML = `
 	  <div class="row">
 		  <div class="col-md-4">
@@ -424,16 +427,20 @@ const renderPerson = (person) => {
 		  </div>
 		  <div class="col-md-8">
 			  <h2 id="actor-name">${person.name}</h2>
-			  <p id="actor-gender" ><b>Gender : </b> ${person.gender}</p>
-			  <p id "actor-birthday"><b>Birthday : </b>${person.birthday}</p>
-			  <p id="person-popularity"><b>Popularity : </b> ${person.popularity} </p>
-		  </div>
-		  	<div>
+			  <h5 id='actor-nickNmaes'><b>also known as :</b> <p>${person.also_known_as}/<p></h5>
+			  <h5 id="actor-job" ><b>known for department : </b> ${person.known_for_department}</h5>
+			  <h5 id="actor-gender" ><b>Gender : </b> ${person.gender}</h5>
+			  <h5 id "actor-birthday"><b>Birthday : </b>${person.birthday}</h5>
+			  <h5 id "actor-placeBirth"><b>Place of birth : </b>${person.place_of_birth}</h5>
+			  <h5 id="person-popularity"><b>Popularity : </b> ${person.popularity} </h5>
+			  <br>
 			  <h3>Biography:</h3>
 			  <p id = "actor-biography">${person.biography}</p>
-			</div>
+		  </div>
+
 			<div>
-			<h3>Biography:</h3>
+			<br>
+			<h3>Related Movies:</h3>
 			<div class="movies">
 			${person.movies
 				.map((movie) => {
@@ -450,11 +457,14 @@ const renderPerson = (person) => {
 					</div>
 			</div>
 			`;
+			
 				})
+				
 				.join('')}
 			</div>
 			`;
 };
+
 // let a = document.createElement('a')
 // a.href = '#'
 // a.id = 'actorPage'
