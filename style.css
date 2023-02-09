@@ -66,6 +66,9 @@ body {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 2rem;
 }
+#actor-backdrop{
+    width: 100%;
+}
 .bigCard{
 	border: 1px solid rgba(45, 42, 42, 0.593);
 }
@@ -208,6 +211,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    cursor: pointer;
 }
 
 .container-actor .actor-card {
