@@ -400,7 +400,7 @@ const search = () => {
       // console.log((one.title || one.name).toLowerCase());
       return (one.title || one.name)
         .toLowerCase()
-        .includes(event.target.elements[0].value);
+        .includes(event.target.elements[0].value.toLowerCase());
     });
     CONTAINER.innerHTML = '';
     renderSearchAndFilter(found);
@@ -410,13 +410,13 @@ const search = () => {
 // to check if the clicked item in the search results is
 // Movie or Actor, since each have different
 // properties and different page
-const searchDetails = async (movie) => {
+const searchDetails = async (result) => {
   // console.log(movie);
-  if ('profile_path' in movie) {
-    //call here the single actor page
+  if ('profile_path' in result) {
+    personDetails(result)
   }
-  if ('poster_path' in movie) {
-    movieDetails(movie);
+  if ('poster_path' in result) {
+    movieDetails(result);
   }
 };
 const aboutPage = () => {
