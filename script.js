@@ -400,7 +400,7 @@ const search = () => {
       // console.log((one.title || one.name).toLowerCase());
       return (one.title || one.name)
         .toLowerCase()
-        .includes(event.target.elements[0].value);
+        .includes(event.target.elements[0].value.toLowerCase());
     });
     CONTAINER.innerHTML = '';
     renderSearchAndFilter(found);
