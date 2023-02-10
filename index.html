@@ -1,18 +1,141 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Movie</title>
-</head>
+  </head>
 
-<body>
-    <div class="container">
-    </div>
+  <body>
+	<nav
+      class="nav-css navbar navbar-expand-sm sticky-top bg-dark navbar-dark  "
+      style="background-color: #e3f2fd">
+      <ul class="navbar-nav "  style="margin-left:30px;">
+        <li><a href="#"class=" navbar-brand " >
+          <img src="logo/e698bad305fecadbbeb175e2d7ab9837(1).svg" 
+          alt="MovieByUs"
+          width="40" height="40"
+          >
+          MovieByUs</a></li>
+      </ul>
+      <button class="me-2 navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#toggleMobileMenu"
+      aria-controls="toggleMobileMenu"
+      aria-expanded="false"
+      aria-table="Toggle Navigation"
+      >
+      <span class="navbar-toggler-icon" ></span>
+    </button>
+
+     <div class="collapse navbar-collapse justify-content-lg-around" id="toggleMobileMenu">
+        <ul class="navbar-nav text-center ">
+            <!-- <li><a href="#"class=" navbar-brand " >MadeByUs</a></li> -->
+            <li class="nav-item"><a href="#" class="nav-link ">Home</a></li>
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Genres</a>
+              <ul id="genres" class="dropdown-menu overflow-scroll">
+                
+              </ul>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link ">Actors</a></li>
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</a>
+              <ul id="filter" class="dropdown-menu overflow-scroll">
+                
+              </ul>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link ">About</a></li>
+          </ul>
+          <form id ="form" class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning"  type="submit">Search</button>
+          </form>
+     </div>
+    </nav>
+    <div class="container"></div>
+
+	<footer class="d-flex flex-column justify-content-center fixed bg-dark text-white pb-3 pt-6 mt-5 ">
+		<div class="d-lg-flex  flex-row justify-content-center text-center pt-6">
+		  <div class="p-2 bd-highlight">
+			  <a href="https://github.com/iiabady">
+			
+			  <i class="fa-brands fa-github fa-2x" style="height: 10px;color: rgb(63, 112, 234);"></i>
+			
+			<div class="name">
+			  <i class="fa-brands ">Abdullah</i>
+			</div>
+		  </a>
+		</div>
+		  <div class="p-2 bd-highlight"> 
+			 <a href="https://github.com/BKR779">
+				
+				  <i class="fa-brands fa-github fa-2x" style="height: 10px; color: rgb(214, 196, 41);"></i>
+				
+				<div class="name">
+				  <i class="fa-brands ">Abobakr</i>
+				</div>
+			  </a>
+			</div>
+			<div class="p-2 bd-highlight"> 
+			 <a href="https://github.com/SarahSalem-hub">
+				
+				  <i class="fa-brands fa-github fa-2x" style="height: 10px;color: rgb(227, 106, 177); "></i>
+				
+				<div class="name">
+				  <i class="fa-brands ">Sarah</i>
+				</div>
+			  </a>
+			</div>
+			<div class="p-2 bd-highlight"> 
+			  <a href="https://github.com/SufyanCS">
+				 
+				   <i class="fa-brands fa-github fa-2x" style="height: 10px; color: rgb(241, 35, 20);"></i>
+				 
+				 <div class="name">
+				   <i class="fa-brands ">Sufyan</i>
+				 </div>
+			   </a>
+			 </div>
+			 <div class="p-2 bd-highlight"> 
+			  <a href="https://github.com/YassinAbdulrahman?tab=repositories">
+				 
+				   <i class="fa-brands fa-github fa-2x" style="height: 10px; color: rgb(120, 227, 106);"></i>
+				 
+				 <div class="name">
+				   <i class="fa-brands ">Yassin</i>
+				 </div>
+			   </a>
+			 </div>
+			 
+		</div>
+		<div id="copyrightDiv" class="text-center"> <small class="text-white pt-10">&copy;2023 Copyright MadeByUs All rights reserved</small></div>
+  
+	  </footer>
+
     <script type="text/javascript" src="script.js"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

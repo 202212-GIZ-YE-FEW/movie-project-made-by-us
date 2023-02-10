@@ -1,11 +1,374 @@
-#movie-backdrop {
-    width: 100%;
+
+
+/* Default that came with the fiels */
+
+
+
+
+/* ---------------------------------------------------------- */
+
+/* The Root Color */
+:root {
+	--primary-color: #0f0d0d;
+	--secondary-color: #f9f9f9;
 }
 
+/* ---------------------------------------------------------- */
+
+/* The Body Color */
+body {
+	background-color: var(--primary-color); /*#15262D ;*/
+	color: var(--secondary-color);
+  font-family: 'Open Sans', sans-serif;
+}
 .container {
-    padding-top: 32px;
+	margin-top: 50px;
+}
+#movie-backdrop {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+}
+/* Default that came with the fiels */
+
+#movie-release-date>p,
+#movie-runtime>p,
+#movie-lang>p,
+.movie-prodaction>p,
+#directior-name>p,
+#movie-votes>p,
+#movie-rating>p {
+    display: inline-block;
+}
+
+#movie-release-date>span,
+#movie-runtime>span,
+#movie-lang>span,
+.movie-prodaction>span,
+#directior-name>span,
+#movie-votes>span,
+#movie-rating>span {
+    display: inline-block;
+    background-color: #FFF;
+    color: #000;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+/* Movies Grid  */
+.movies,.mainCard {
+	max-width: 2560px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+#actor-backdrop{
+    width: 100%;
+}
+.bigCard{
+	border: 1px solid rgba(45, 42, 42, 0.593);
+}
+
+/* Phone & ipad flexaple */
+@media (max-width: 800px) {
+	.movies,.mainCard {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 500px) {
+	.movies,.mainCard {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------- */
+
+/* Cursor Of The Cards */
+.card {
+	background-color: inherit;
+	cursor: pointer;
+}
+
+/* ---------------------------------------------------------- */
+
+/* Overview */
+.overview {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 5%;
+	background-color: #fff;
+	padding: 1rem;
+	transform: translateY(101%);
+	transition: transform 0.3 ease-in;
+}
+
+.actor-section {
+    margin-top: 30px;
+    height: 200px;
+    width: 100%;
 }
 
 #actors {
     margin: 24px 16px 0 0;
+}
+
+#trail {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.title-Pro {
+    margin-top: 40px;
+}
+#movie-overview{
+    font-size: 20px;
+    line-height: 1.6;
+    font-family: 'Times New Roman', Times, serif;
+}
+.container .movie-title {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -1.2px;
+    position: relative;
+    width: 70%;
+}
+.container h3.production {
+    width: 35%;
+}
+.container h3.over {
+    width: 17%;
+}
+.container h3.actor {
+    width: 17%;
+}
+
+.container h3.trails {
+    width: 17%;
+}
+
+.container h3.related {
+    width: 22%;
+}
+
+
+.container .movie-title::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    background-color: #5B686D;
+    width: 50px;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: -1;
+    transition: width 0.3s;
+}
+
+.container .movie-title:hover::before {
+    width: 100%;
+}
+
+.container-production {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.production-companies {
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    place-content: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    height: 200px;
+}
+
+.production-companies>img {
+    width: 100%;
+    object-fit: contain;
+    height: 100px;
+}
+
+.production-companies>p {
+    color: #161619;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* Start Actor Card Desing With Single Home Page */
+.container-actor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    
+}
+
+.container-actor .actor-card {
+    width: 200px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.container-actor .actor-card:hover {
+    transform: translateY(-20px);
+}
+
+.container-actor .actor-card #actor-img {
+    width: 100%;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    border: 1px solid #FFF;
+}
+
+.container-actor .actor-card p {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #FFF;
+    color: #000;
+    width: 150px;
+    padding: 5px 6px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s;
+    opacity: 0;
+}
+
+.container-actor .actor-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    background-color: #e4e4e480;
+    width: 0;
+    transition: all 0.3s;
+}
+
+.container-actor .actor-card:hover:before {
+    width: 100%;
+}
+
+.container-actor .actor-card:hover p {
+    opacity: 1;
+    z-index: 100;
+}
+
+/* End Actor Card Desing With Single Home Page */
+
+/* Overview Hover */
+.card:hover .overview {
+	background-color: var(--primary-color);
+	display: block;
+	transform: translateY(24%);
+	transition: transform 0.3 ease-out;
+}
+/* Navbar & footer styles*/
+#actors {
+    margin: 24px 16px 0 0;
+}
+/* div a {
+    color: black;
+} */
+
+a.nav-link {
+    color: rgba(218, 217, 217, 0.413);
+    text-decoration: none;
+    border-radius: 15px;
+   
+    /* margin: 10px; */
+}
+.active{
+    /* background-color: rebeccapurple; */
+    /* pointer-events: none; */
+    color: white !important;
+
+}
+.nav-item a:hover{
+    text-decoration: none;
+    /* border: 2px solid purple; */
+    color: rgb(229, 184, 48)
+}
+/* #current{
+    background-color: rgb(10, 126, 243);
+    color: white;
+} */
+.dropdown-menu{
+    max-height: 219px;
+    overflow-y: scroll;
+}
+/* .overflow-scroll{
+	overflow: hidden !important;
+} */
+footer a{
+    color: antiquewhite;
+}
+.d-flex footer{
+    padding: 30px;
+}
+a.navbar-brand{
+    color: #ebbc4f;
+    pointer-events: none;
+}
+/* .nav-css{
+	background-color: inherit;
+	color: inherit;
+} */
+#img-card{
+	object-fit: contain;
+	width: 100%;
+}
+#genres, #filter{
+	background-color: rgb(21, 20, 20);
+	
+}
+#genres li a ,#filter li a {
+	color: antiquewhite;
+	text-align: center;
+}
+
+#genres li a:hover ,#filter li a:hover {
+	color: rgb(216, 179, 16);
+	background-color: inherit
+	/* text-align: center; */
+}
+
+.navbar-brand img{
+	border-radius: 50%;
+    object-fit: cover;
+}
+
+.d-lg-flex{
+	padding: 14px;
+}
+
+#copyrightDiv{
+	padding: 13px;
+}
+.name{
+	font-size: smaller;
+	letter-spacing: 3px; 
+}
+
+
+#actor-biography{
+	font-size: larger;
 }
