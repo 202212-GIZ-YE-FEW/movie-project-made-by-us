@@ -312,12 +312,12 @@ a.nav-link {
     color: white;
 } */
 .dropdown-menu{
-    max-height: 660px;
+    max-height: 219px;
     overflow-y: scroll;
 }
-.overflow-scroll{
+/* .overflow-scroll{
 	overflow: hidden !important;
-}
+} */
 footer a{
     color: antiquewhite;
 }
@@ -353,6 +353,7 @@ a.navbar-brand{
 
 .navbar-brand img{
 	border-radius: 50%;
+    object-fit: cover;
 }
 
 .d-lg-flex{
